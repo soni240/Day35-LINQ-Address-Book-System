@@ -1,56 +1,97 @@
-
 using Linq_Address_Book;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
-namespace ContactManagerTesting1
+namespace ContactManagerTesting
 {
     [TestClass]
     public class UnitTest1
     {
-        Console.WriteLine("Welcome to LINQ AddressBookSystem!");
-            //Create Object for DataTable
-            ContactDataManager contactDataManager = new ContactDataManager();
-        ContactDataManager contactDataManagers = new ContactDataManager();
-        DataTableManager dataTableManger = new DataTableManager();
-        dataTableManger.CreateDataTable();
+        DataTableManager dataTableManger;
 
-            //Insert Values into Table
-            ContactDataManager.FirstName = "Ankita";
-            contactDataManager.LastName = "Venkatesh";
-            contactDataManager.PhoneNumber = 9842905050;
-            contactDataManager.Email = "shalini@gmail.com";
-            contactDataManager.Address = "4,B Block,Avadi";
-            contactDataManager.City = "chennai";
-            contactDataManager.State = "TN";
-            contactDataManager.zip = 600072;
-            dataTableManger.InsertintoDataTable(contactDataManager);
+        [TestInitialize]
+        public void SetUp()
+        {
+            dataTableManger = new DataTableManager();
+        }
 
-            //Insert Values into Table
-            contactDataManagers.FirstName = "Raksha";
-            contactDataManagers.LastName = "Parthiban";
-            contactDataManagers.PhoneNumber = 7742905050;
-            contactDataManagers.Email = "Raksha@gmail.com";
-            contactDataManagers.Address = "sasthri street,ambattur";
-            ContactDataManager.City = "chennai";
-            contactDataManagers.State = "TN";
-            contactDataManagers.zip = 123001;
-            dataTableManger.InsertintoDataTable(contactDataManagers);
-            dataTableManger.Display();
-            //Modify
-            int varl = dataTableManger.EditDataTable("lalita", "Lastname");
-        Console.WriteLine("Success" + varl);
-            //Delete
-            int var2 = dataTableManger.DeleteRowInDataTable("lalita");
-        Console.WriteLine("Success" + varl);
-            //Retrieve based on city or state
-            string var3 = dataTableManger.RetrieveBasedOnCityorState("Bareilly", "UP");
-        Console.WriteLine("Success" + varl);
-            //count based on city or state
-            string var4 = dataTableManger.RetrieveCountBasedOnCityorState();
-        Console.WriteLine("Success" + varl);
+        [TestMethod]
+        [TestCategory("Insert Values in Data Table")]
+        public void GivenInsertValues_returnInteger()
+        {
+            int expected = 2;
+            int actual = dataTableManger.AddValues();
+            Assert.AreEqual(actual, expected);
+        }
+        [TestMethod]
+        [TestCategory("Modify Values in Data Table")]
+        public void GivenModifyValues_returnInteger()
+        {
+            int expected = 1;
+            int actual = dataTableManger.EditDataTable("Raksha", "Lastname");
+            Assert.AreEqual(actual, expected);
+        }
+        [TestMethod]
+        [TestCategory("Modify Values in Data Table-Negative Test Case")]
+        public void GivenWrong_ModifyValues_returnInteger()
+        {
+            int expected = 0;
+            int actual = dataTableManger.EditDataTable("mam", "Lastname");
+            Assert.AreEqual(actual, expected);
+        }
+        //Usecase 3: Delete values in DataTable based on Name
+        [TestMethod]
+        [TestCategory("Delete Row in Data Table")]
+        public void GivenDeleteQuery_returnInteger()
+        {
+            int expected = 1;
+            int actual = dataTableManger.DeleteRowInDataTable("Raksha");
+            Assert.AreEqual(actual, expected);
+        }
+        [TestMethod]
+        [TestCategory("Delete Row in Data Table-Negative Test Case")]
+        public void GivenWrongDeleteQuery_returnInteger()
+        {
+            int expected = 0;
+            int actual = dataTableManger.DeleteRowInDataTable("lala");
+            Assert.AreEqual(actual, expected);
+        }
+        //Usecase 4: Retrieve values from DataTable based on City or State
+        [TestMethod]
+        [TestCategory("Retrieve Row in Data Table based on City ")]
+        public void GivenRetrieveQuery_BasedOnCityandState_returnString()
+        {
+            string expected = "Raksha";
+            string actual = dataTableManger.RetrieveBasedOnCityorState("Lucknow", "TN");
+            Assert.AreEqual(actual, expected);
+        }
+        [TestMethod]
+        [TestCategory("Retrieve Row in Data Table based on state ")]
+        public void GivenRetrieveQuery_BasedOnCityorState_returnString()
+        {
+            string expected = "Raksha Parthiban";
+            string actual = dataTableManger.RetrieveBasedOnCityorState("chennai", "TN");
+            Assert.AreEqual(actual, expected);
+        }
+        //Usecase 5: Retrieve count values from DataTable based on City or State
+        [TestMethod]
+        [TestCategory("Retrieve Row in Data Table based on City ")]
+        public void GivenRetrieveCountQuery_BasedOnCityandState_returnString()
+        {
+            string expected = "1 2";
+            string actual = dataTableManger.RetrieveCountBasedOnCityorState();
+            Assert.AreEqual(actual, expected);
+        }
+        //Usecase 6: Sort based on City
+        [TestMethod]
+        [TestCategory("Sort based on City")]
+        public void GivenSortQuery_BasedOnCityandState_returnString()
+        {
+            string expected = "Raksha Shalini ";
+            string actual = dataTableManger.SortBasedOnNameInDataTable("chennai");
+            Assert.AreEqual(actual, expected);
+        }
+
     }
 }
-
 
     
