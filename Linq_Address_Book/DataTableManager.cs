@@ -121,10 +121,10 @@ namespace Linq_Address_Book
             ContactDataManager contactDataManager = new ContactDataManager();
             ContactDataManager contactDataManagers = new ContactDataManager();
             //Insert Values into Table
-            contactDataManager.FirstName = "Ankita";
-            contactDataManager.LastName = "V";
+            contactDataManager.FirstName = "Shalini";
+            contactDataManager.LastName = "Venkatesh";
             contactDataManager.PhoneNumber = 9842905050;
-            contactDataManager.Email = "ankita@gmail.com";
+            contactDataManager.Email = "shalini@gmail.com";
             contactDataManager.Address = "4,B Block,Avadi";
             contactDataManager.City = "chennai";
             contactDataManager.State = "TN";
@@ -132,10 +132,10 @@ namespace Linq_Address_Book
             InsertintoDataTable(contactDataManager);
 
             //Insert Values into Table
-            contactDataManagers.FirstName = "john";
-            contactDataManagers.LastName = "k";
+            contactDataManagers.FirstName = "Raksha";
+            contactDataManagers.LastName = "Parthiban";
             contactDataManagers.PhoneNumber = 7742905050;
-            contactDataManagers.Email = "john@gmail.com";
+            contactDataManagers.Email = "raksha@gmail.com";
             contactDataManagers.Address = "Sasthri street,ambattur";
             contactDataManagers.City = "chennai";
             contactDataManagers.State = "TN";
@@ -159,6 +159,18 @@ namespace Linq_Address_Book
             dtRow["Email"] = contactDataManager.Email;
             custTable.Rows.Add(dtRow);
 
+        }
+        public int EditDataTable(string FirstName, string ColumnName)
+        {
+            AddValues();
+            var modifiedList = (from ContactList in custTable.AsEnumerable() where ContactList.Field<string>("FirstName") == FirstName select ContactList).FirstOrDefault();
+            if (modifiedList != null)
+            {
+                modifiedList[ColumnName] = "Sing";
+                Display();
+                return 1;
+            }
+            else return 0;
         }
         //Display all Values in DataRow
         public void Display()
