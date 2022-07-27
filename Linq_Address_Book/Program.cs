@@ -12,7 +12,7 @@ dataTableManger.CreateDataTable();
 contactDataManager.FirstName = "Ankita";
 contactDataManager.LastName = "Venkatesh";
 contactDataManager.PhoneNumber = 9842905050;
-contactDataManager.Email = "ankita@gmail.com";
+contactDataManager.Email = "shalini@gmail.com";
 contactDataManager.Address = "4,B Block,Avadi";
 contactDataManager.City = "chennai";
 contactDataManager.State = "TN";
@@ -38,6 +38,9 @@ int var2 = dataTableManger.DeleteRowInDataTable("lalita");
 Console.WriteLine("Success" + varl);
 //Retrieve based on city or state
 string var3 = dataTableManger.RetrieveBasedOnCityorState("Bareilly", "UP");
+Console.WriteLine("Success" + varl);
+//count based on city or state
+string var4 = dataTableManger.RetrieveCountBasedOnCityorState();
 Console.WriteLine("Success" + varl);
         
     
