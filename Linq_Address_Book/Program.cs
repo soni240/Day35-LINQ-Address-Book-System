@@ -9,7 +9,7 @@ DataTableManager dataTableManger = new DataTableManager();
 dataTableManger.CreateDataTable();
 
 //Insert Values into Table
-contactDataManager.FirstName = "shalini";
+contactDataManager.FirstName = "Shalini";
 contactDataManager.LastName = "Venkatesh";
 contactDataManager.PhoneNumber = 9842905050;
 contactDataManager.Email = "shalini@gmail.com";
